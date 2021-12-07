@@ -30,13 +30,13 @@ public:
 	UStaticMeshComponent* WallNorth;
 
 	UPROPERTY(BlueprintReadWrite, Instanced)
-		UStaticMeshComponent* WallSouth;
+	UStaticMeshComponent* WallSouth;
 	
 	UPROPERTY(BlueprintReadWrite, Instanced)
-		UStaticMeshComponent* WallEast;
+	UStaticMeshComponent* WallEast;
 	
 	UPROPERTY(BlueprintReadWrite, Instanced)
-		UStaticMeshComponent* WallWest;
+	UStaticMeshComponent* WallWest;
 
 	UPROPERTY(EditDefaultsOnly)
 	int Width;

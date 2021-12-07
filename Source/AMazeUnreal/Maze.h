@@ -20,9 +20,12 @@ protected:
 	virtual void BeginPlay() override;
 
 public:	
-	UPROPERTY()
+	UPROPERTY(EditAnywhere)
 	int32 Columns = 5;
 
-	UPROPERTY()
+	UPROPERTY(EditAnywhere)
 	int32 Rows = 6;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<AActor> Cell;
 };
