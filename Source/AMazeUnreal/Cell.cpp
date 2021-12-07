@@ -15,22 +15,22 @@ void ACell::BeginPlay()
 
 	if (ConnectedCell(EDirection::North) != InvalidCell) 
 	{
-		dynamic_cast<AActor*>(WallNorth.Get())->Destroy();
+		WallNorth->DestroyComponent();
 	}
 
 	if (ConnectedCell(EDirection::South) != InvalidCell) 
 	{
-		dynamic_cast<AActor*>(WallSouth.Get())->Destroy();
+		WallSouth->DestroyComponent();
 	}
 
 	if (ConnectedCell(EDirection::East) != InvalidCell) 
 	{
-		dynamic_cast<AActor*>(WallEast.Get())->Destroy();
+		WallEast->DestroyComponent();
 	}
 
 	if (ConnectedCell(EDirection::West) != InvalidCell) 
 	{
-		dynamic_cast<AActor*>(WallWest.Get())->Destroy();
+		WallWest->DestroyComponent();
 	}
 }
 

@@ -23,25 +23,25 @@ protected:
 
 public:
 
-	UPROPERTY()
+	UPROPERTY(EditAnywhere)
 	int Id = 0;
 	
-	UPROPERTY()
-	TSubclassOf<AActor> WallNorth;
+	UPROPERTY(BlueprintReadWrite, Instanced)
+	UStaticMeshComponent* WallNorth;
 
-	UPROPERTY()
-	TSubclassOf<AActor> WallSouth;
+	UPROPERTY(BlueprintReadWrite, Instanced)
+		UStaticMeshComponent* WallSouth;
 	
-	UPROPERTY()
-	TSubclassOf<AActor> WallEast;
+	UPROPERTY(BlueprintReadWrite, Instanced)
+		UStaticMeshComponent* WallEast;
 	
-	UPROPERTY()
-	TSubclassOf<AActor> WallWest;
+	UPROPERTY(BlueprintReadWrite, Instanced)
+		UStaticMeshComponent* WallWest;
 
-	UPROPERTY()
+	UPROPERTY(EditDefaultsOnly)
 	int Width;
 	
-	UPROPERTY()
+	UPROPERTY(EditDefaultsOnly)
 	int Depth;
 
 	static constexpr int InvalidCell = -1;
