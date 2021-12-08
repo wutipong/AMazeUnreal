@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Cell.h"
+
 #include "Maze.generated.h"
 
 UCLASS()
@@ -19,6 +21,8 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	TArray<ACell*> cells;
+
 public:	
 	UPROPERTY(EditAnywhere)
 	int32 Columns = 5;
@@ -27,5 +31,7 @@ public:
 	int32 Rows = 6;
 
 	UPROPERTY(EditAnywhere)
-	TSubclassOf<AActor> Cell;
+	TSubclassOf<ACell> Cell;
+
+	int Count() const { return Columns * Rows; }
 };
