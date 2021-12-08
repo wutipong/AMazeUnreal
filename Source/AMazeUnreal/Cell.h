@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Direction.h"
+#include "MazeGen/maze_gen.hpp"
 
 #include "Cell.generated.h"
 
@@ -37,18 +37,10 @@ public:
 	UStaticMeshComponent* WallWest;
 
 	UPROPERTY(EditDefaultsOnly)
-	int Width;
+	float Width;
 	
 	UPROPERTY(EditDefaultsOnly)
-	int Depth;
+	float Depth;
 
-	static constexpr int InvalidCell = -1;
-
-	void ConnectTo(ACell* pToCell, EDirection direction);
-
-	int& ConnectedCell(EDirection direction);
-
-private:
-	int connectedCells[static_cast<int>(EDirection::Count)] = { InvalidCell, InvalidCell, InvalidCell, InvalidCell };
-
+	void Apply(const MazeGen::Cell& cell);
 };

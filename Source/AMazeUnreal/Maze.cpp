@@ -2,6 +2,7 @@
 
 
 #include "Maze.h"
+#include "MazeGen/maze_gen.hpp"
 
 // Sets default values
 AMaze::AMaze()
@@ -15,26 +16,28 @@ void AMaze::BeginPlay()
 
 	cells.SetNumUninitialized(Count());
 
-	int cellWidth = Cell.GetDefaultObject()->Width;
-	int cellHeight = Cell.GetDefaultObject()->Depth;
+	auto cellWidth = Cell.GetDefaultObject()->Width;
+	auto cellDepth = Cell.GetDefaultObject()->Depth;
 
-	FVector origin;
-	FVector extent;
-	Cell.GetDefaultObject()->GetActorBounds(false, origin, extent);
+	auto maze = MazeGen::Generate(Columns, Rows);
 
-	for (int r = 0; r < Rows; r++) 
+	for (int r = 0; r < Rows; r++)
 	{
-		for (int c = 0; c < Columns; c++) 
+		for (int c = 0; c < Columns; c++)
 		{
 			int index = (r * Columns) + c;
 			float x = c * cellWidth;
-			float y = r * cellHeight;
+			float y = r * cellDepth;
 
-			FTransform transform;
-			transform.SetLocation({ x, y, 0 });
+			// Unreal coordinate system is opposite to MazeGen coordinate system.
+			FVector location{ -x, -y, 0 };
+			FRotator rotator{ 0,0,0 };
 
-			auto cell = GetWorld()->SpawnActor(Cell.Get(), &transform);
-			cells[index] = dynamic_cast<ACell*>(cell);
+			FActorSpawnParameters params{};
+			params.Owner = this;
+
+			cells[index] = GetWorld()->SpawnActor<ACell>(Cell, location, rotator, params); 
+			cells[index]->Apply(maze[index]);
 		}
 	}
 }

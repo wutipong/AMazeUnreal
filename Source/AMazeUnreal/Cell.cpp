@@ -13,35 +13,28 @@ void ACell::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if (ConnectedCell(EDirection::North) != InvalidCell) 
+	
+}
+
+void ACell::Apply(const MazeGen::Cell& cell)
+{
+	if (cell.ConnectedCell(MazeGen::Direction::North) != MazeGen::InvalidCell) 
 	{
 		WallNorth->DestroyComponent();
 	}
 
-	if (ConnectedCell(EDirection::South) != InvalidCell) 
+	if (cell.ConnectedCell(MazeGen::Direction::South) != MazeGen::InvalidCell)
 	{
 		WallSouth->DestroyComponent();
 	}
 
-	if (ConnectedCell(EDirection::East) != InvalidCell) 
+	if (cell.ConnectedCell(MazeGen::Direction::East) != MazeGen::InvalidCell)
 	{
 		WallEast->DestroyComponent();
 	}
 
-	if (ConnectedCell(EDirection::West) != InvalidCell) 
+	if (cell.ConnectedCell(MazeGen::Direction::West) != MazeGen::InvalidCell)
 	{
 		WallWest->DestroyComponent();
 	}
-}
-
-void ACell::ConnectTo(ACell* pToCell, EDirection direction)
-{
-	ConnectedCell(direction) = pToCell->Id;
-	pToCell->ConnectedCell(Opposite(direction)) = Id;
-}
-
-int& ACell::ConnectedCell(EDirection direction) 
-{
-	int d = static_cast<int>(direction);
-	return connectedCells[d];
 }
