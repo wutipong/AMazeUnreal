@@ -22,8 +22,6 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-
-	UPROPERTY(EditAnywhere)
 	int Id = 0;
 	
 	UPROPERTY(BlueprintReadWrite, Instanced)

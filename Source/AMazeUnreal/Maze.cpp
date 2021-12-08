@@ -15,8 +15,12 @@ void AMaze::BeginPlay()
 
 	cells.SetNumUninitialized(Count());
 
-	int cellWidth = dynamic_cast<ACell*>(Cell.Get())->Width;
-	int cellHeight = dynamic_cast<ACell*>(Cell.Get())->Depth;
+	int cellWidth = Cell.GetDefaultObject()->Width;
+	int cellHeight = Cell.GetDefaultObject()->Depth;
+
+	FVector origin;
+	FVector extent;
+	Cell.GetDefaultObject()->GetActorBounds(false, origin, extent);
 
 	for (int r = 0; r < Rows; r++) 
 	{
@@ -29,7 +33,7 @@ void AMaze::BeginPlay()
 			FTransform transform;
 			transform.SetLocation({ x, y, 0 });
 
-			auto cell = GetWorld()->SpawnActor(Cell->StaticClass(), &transform);
+			auto cell = GetWorld()->SpawnActor(Cell.Get(), &transform);
 			cells[index] = dynamic_cast<ACell*>(cell);
 		}
 	}
